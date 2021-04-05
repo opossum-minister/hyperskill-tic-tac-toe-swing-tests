@@ -103,14 +103,14 @@ public class TicTacToeTest extends SwingTest {
 
         assertEquals(3, cols.length,
                 "The board should have exactly 3 columns. "
-                        + "The coordinates for columns are {0}, "
-                        + "the buttons have {1} different coordinates for columns",
+                        + "The columns cordinates are {0}, "
+                        + "the buttons have {1} different columns coordinates",
                 Arrays.toString(cols), cols.length);
 
         assertEquals(3, rows.length,
                 "The board should have exactly 3 rows. "
-                        + "The coordinates for rows are {0}, "
-                        + "The buttons have {0} different coordinates for rows",
+                        + "The rows coordinates are {0}, "
+                        + "The buttons have {0} different rows coordinates",
                 Arrays.toString(rows), rows.length);
 
         return correct();
@@ -124,30 +124,30 @@ public class TicTacToeTest extends SwingTest {
         range(0, 9).forEach(index -> {
 
             assertEquals(rows[index / 3], buttons.get(index).getY(),
-                    "The button {0} should be located on the {1} row",
+                    "The button {0} should be located in the {1} row",
                     buttons.get(index).getText(), ROW_NAME[index / 3]);
 
             assertEquals(cols[index % 3], buttons.get(index).getX(),
-                    "The button {0} should be located on the {1} column",
+                    "The button {0} should be located in the {1} column",
                     buttons.get(index).getText(), COL_NAME[index % 3]);
         });
 
         return correct();
     }
 
-    @DynamicTest(feedback = "An JLabel with name 'LabelStatus' should be added as status bar")
+    @DynamicTest(feedback = "Add a JLabel with the name of 'LabelStatus' as status bar")
     CheckResult test6() {
         labelStatus.requireVisible();
         return correct();
     }
 
-    @DynamicTest(feedback = "The status bar should contains text 'Game is not started' before the game")
+    @DynamicTest(feedback = "The status bar should contain the following text: 'Game is not started' before the game")
     CheckResult test7() {
         labelStatus.requireText(GAME_STATE.get("E"));
         return correct();
     }
 
-    @DynamicTest(feedback = "An JButton with name 'ButtonReset' should be added and enabled")
+    @DynamicTest(feedback = "Add a JButton with the name of 'ButtonReset' and enable it")
     CheckResult test8() {
         buttonReset.requireEnabled();
         return correct();
@@ -162,7 +162,7 @@ public class TicTacToeTest extends SwingTest {
         return correct();
     }
 
-    @DynamicTest(feedback = "After the reset button pressed the board should be empty")
+    @DynamicTest(feedback = "The Reset button should clear the board")
     CheckResult test12() {
         buttonReset.click();
         cells().forEach(cell -> cell.requireText(EMPTY_CELL));
@@ -197,7 +197,7 @@ public class TicTacToeTest extends SwingTest {
             {"A1", "X___XO_OX", "X"}, {"RS", "_________", "E"},
     };
 
-    @DynamicTest(data = "humanVsHuman", feedback = "Incorrect state of the game")
+    @DynamicTest(data = "humanVsHuman", feedback = "Incorrect game status")
     CheckResult test20(final String cell, final String position, final String state) {
         board.get(cell).click();
         labelStatus.requireText(GAME_STATE.get(state));
